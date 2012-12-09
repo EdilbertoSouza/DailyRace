@@ -1,29 +1,41 @@
 var GameOverLayer = cc.Layer.extend({
     ctor:function() {
 
+        this.setTouchEnabled(true);
+        this.setKeyboardEnabled(true);
+
         // background layer: another image
-        var background = cc.Sprite.create(s_background);
+        var background = cc.Sprite.create(s_game_over);
         background.setAnchorPoint(cc.p(0, 0));
         this.addChild(background);
 
         // Replay
-    	var lblReplay = cc.LabelTTF.create( "Jogar Novamente", "Helvetica", 36 );
-        var itemReplay = cc.MenuItemLabel.create(lblReplay, this, function() {
-    		cc.AudioEngine.getInstance().playBackgroundMusic(s_bgSound, true);
-        	cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5,new MobileGameScene()));
-        });
+        var itemReplay = cc.MenuItemImage.create(s_replay, s_replay, this, this.menuReplay);
+        itemReplay.setScale(0.8);
         var menuReplay = cc.Menu.create(itemReplay);
-        menuReplay.setPosition( cc.p( 205, 59 ) );
+        menuReplay.setPosition( cc.p( 165, 059 ) );
         this.addChild(menuReplay);
 
-		// Menu
-    	var lblMenu = cc.LabelTTF.create( "Menu Inicial", "Helvetica", 36 );
-        var itemMenu = cc.MenuItemLabel.create(lblMenu, this, function() {
-        	cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5,new MenuScene()));
-        });
-        var menu = cc.Menu.create(itemMenu);
-        menu.setPosition( cc.p( 492, 59 ) );
-        this.addChild(menu);
+		// Menu Inicial
+        var itemMenuInicial = cc.MenuItemImage.create(s_menu, s_menu, this, this.menuInicial);
+        var menuInicial = cc.Menu.create(itemMenuInicial);
+        menuInicial.setPosition( cc.p( 470, 059 ) );
+        this.addChild(menuInicial);
+    },
+	menuReplay:function() {
+	   	cc.AudioEngine.getInstance().playBackgroundMusic(s_bgSound, true);
+      	cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5,new MobileGameScene()));
+	},
+	menuInicial:function() {
+      	cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5,new MenuScene()));
+	},
+    onKeyDown:function(e){
+        if(e === cc.KEY.j) {
+        	this.menuReplay();
+  		}
+        if(e === cc.KEY.m) {
+      		this.menuInicial();
+  		}
     }
 });
 

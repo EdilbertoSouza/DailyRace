@@ -1,7 +1,7 @@
 var myCarControl = cc.Sprite.extend({
     _sideVelocity: 0,
     ctor:function(posX, posY) {
-        this.initWithFile(s_myCar);
+        this.initWithFile(s_my_car);
         this.setPosition(new cc.Point(posX,posY));
     },
     update:function(dt) {

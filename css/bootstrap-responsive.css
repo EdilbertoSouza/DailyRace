@@ -91,7 +91,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 700px) {
   .row {
     margin-left: -30px;
     *zoom: 1;
@@ -114,16 +114,16 @@
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
-    width: 1170px;
+    width: 700px;
   }
   .span12 {
-    width: 1170px;
+    width: 700px;
   }
   .span11 {
-    width: 1070px;
+    width: 700px;
   }
   .span10 {
-    width: 970px;
+    width: 670px;
   }
   .span9 {
     width: 870px;

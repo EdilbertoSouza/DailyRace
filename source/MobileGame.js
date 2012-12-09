@@ -1,5 +1,9 @@
+var soundAcc = null;
+var soundBra = null;
+
 var MobileGame = cc.LayerColor.extend({
 	lane:null,
+	panel:null,
 	mycar:null,
 	car2:null,
 	car3:null,
@@ -13,59 +17,65 @@ var MobileGame = cc.LayerColor.extend({
 	lblDistance:null,
 	lblMsg:null,
 	collision:false,
+
     init:function(){
+
         this._super();
-        this.initWithColor(new cc.Color4B(0,0,0,255));
+        this.initWithColor(new cc.Color4B(255,255,255,70));
         this.setPosition(new cc.Point(0,0));
         this.schedule(this.update);
         var size = cc.Director.getInstance().getWinSize();
 
-    	cc.AudioEngine.getInstance().setBackgroundMusicVolume(0.3);
-   		cc.AudioEngine.getInstance().setEffectsVolume(1.5);
-
         this.setTouchEnabled(false);
         this.setKeyboardEnabled(true);
 
+    	cc.AudioEngine.getInstance().setBackgroundMusicVolume(0.3);
+   		cc.AudioEngine.getInstance().setEffectsVolume(1.5);
+
         this.lane = new laneControl();
         this.addChild(this.lane);
-        this.lane.setPosition(new cc.Point(0,size.height/2));
+        this.lane.setPosition(new cc.Point(0,0));
         this.lane.scheduleUpdate();
 
+        this.panel = new panelControl();
+        this.addChild(this.panel);
+        this.panel.setPosition(new cc.Point(523,223));
+
 		//    ctor:function(posX, posY)
-        this.mycar = new myCarControl(370,070);
+        this.mycar = new myCarControl(320,070);
         this.addChild(this.mycar);
         this.mycar.scheduleUpdate();
 
 		//    ctor:function(posX, posY, velocity, sentido)
-        this.car2 = new carControl(400,100,40,"Normal");
+        this.car2 = new carControl(350,100,40,"Normal");
         this.addChild(this.car2);
 
-        this.car3 = new carControl(300,300,40,"Normal");
+        this.car3 = new carControl(250,300,40,"Normal");
         this.addChild(this.car3);
 
-        this.car4 = new carControl(550,500,40,"Normal");
+        this.car4 = new carControl(500,500,40,"Normal");
         this.addChild(this.car4);
 
-        this.car5 = new carControl(230,-300,30,"Contrario");
+        this.car5 = new carControl(180,-700,20,"Contrario");
         this.addChild(this.car5);
+
+        this.lblVelocity = cc.LabelTTF.create("0", "Arial", 20);
+        this.addChild(this.lblVelocity);
+        this.lblVelocity.setPosition(cc.p(543, 414));
+        this.lblVelocity.setColor(cc.yellow());
+
+        this.lblDistance = cc.LabelTTF.create("", "Arial", 20);
+        this.addChild(this.lblDistance);
+        this.lblDistance.setPosition(cc.p(547, 340));
+
+        this.lblTime = cc.LabelTTF.create("", "Arial", 20);
+        this.addChild(this.lblTime);
+        this.lblTime.setPosition(cc.p(555, 261));
 
         this.lblMsg = cc.LabelTTF.create("", "Arial", 18);
         this.addChild(this.lblMsg);
-        this.lblMsg.setPosition(cc.p(470, 420));
-        this.lblMsg.setColor(cc.red());
-
-        this.lblVelocity = cc.LabelTTF.create("0", "Arial", 28);
-        this.addChild(this.lblVelocity);
-        this.lblVelocity.setPosition(cc.p(470, 060));
-        this.lblVelocity.setColor(cc.blue());
-
-        this.lblDistance = cc.LabelTTF.create("", "Arial", 28);
-        this.addChild(this.lblDistance);
-        this.lblDistance.setPosition(cc.p(450, 020));
-
-        this.lblTime = cc.LabelTTF.create("", "Arial", 28);
-        this.addChild(this.lblTime);
-        this.lblTime.setPosition(cc.p(540, 020));
+        this.lblMsg.setPosition(cc.p(450, 020));
+        //this.lblMsg.setColor(cc.red());
 
         return true;
     },
@@ -76,7 +86,7 @@ var MobileGame = cc.LayerColor.extend({
         if (cc.Director.getInstance().isPaused()) {
             cc.Director.getInstance().resume();
 	    	cc.AudioEngine.getInstance().playBackgroundMusic(s_bgSound, false);
-	    	cc.AudioEngine.getInstance().playEffects(s_acceleration);
+	    	//cc.AudioEngine.getInstance().playEffects(s_acceleration);
         } else {
     		cc.AudioEngine.getInstance().stopBackgroundMusic();
     		cc.AudioEngine.getInstance().stopEffect(soundAcc);
@@ -144,10 +154,13 @@ var MobileGame = cc.LayerColor.extend({
          	this.lblMsg.setString("Parabens, voce percorreu 1km");
         }
         if(this.distance > 2000 && this.distance < 2200){
-         	this.lblMsg.setString("Parabens, voce percorreu 2km, falta apenas 1km para chegar ao destino");
+         	this.lblMsg.setString("Parabens, voce percorreu 2km");
+        }
+        if(this.distance > 2500 && this.distance < 2700){
+         	this.lblMsg.setString("Falta apenas 500m para chegar");
         }
         if(this.collision) {
-       		this.lblMsg.setString("Hah! Voce colidiu!");
+       		this.lblMsg.setString("Ha, que pena! Voce colidiu...");
    			this.lane.setVelocity(0);
         }
         return
@@ -160,7 +173,7 @@ var MobileGame = cc.LayerColor.extend({
   		}
         if(e === cc.KEY.s) {
             this.onExit();
-      		history.go(-1);
+      		window.self.location.href = "index.html";
   		}
     },
     onKeyUp:function(e){
@@ -169,8 +182,11 @@ var MobileGame = cc.LayerColor.extend({
     }
 });
 
-var soundAcc = null;
-var soundBra = null;
+var panelControl = cc.Sprite.extend({
+    ctor:function(){
+        this.initWithFile(s_panel);
+    },
+});
 
 MobileGameScene = cc.Scene.extend({
     onEnter:function(){

@@ -1,8 +1,8 @@
 var laneControl = cc.Sprite.extend({
-    currentPosition:460,
+    currentPosition:0,
 	acceleration: 0.1,
 	braking: 0.4,
-	velmax:18,
+	velmax:8,
 	velocity: 0,
 	timeAcc: 0,
 	timeBra: 0,
@@ -18,13 +18,13 @@ var laneControl = cc.Sprite.extend({
 			this.timeBra = 0;
 		}
        	this.currentPosition -= this.velocity;
-		this.setPosition(new cc.Point(270, this.currentPosition));
 		this.validatePosition();
-		this.timeAcc -= 0.1;
+		this.setPosition(new cc.Point(220, this.currentPosition));
+		//this.timeAcc -= 0.1;
     },
 	validatePosition:function() {
-		if(this.currentPosition < 170) this.currentPosition = 460;
-        if(this.currentPosition > 460) this.currentPosition = 170;
+		if(this.currentPosition < -1017) this.currentPosition = 1468;
+        if(this.currentPosition > 1468) this.currentPosition = -1017;
 	},
 	setVelocity:function(value) {
 		this.velocity = value;

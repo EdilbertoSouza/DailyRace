@@ -5,7 +5,7 @@ var carControl = cc.Sprite.extend({
 	posY:0,
 	velocity: 0,
 	sense:"Normal",
-	sizeBand:60,
+	sizeBand:70,
 	factor:1,
     ctor:function(posX, posY, velocity, sense) {
         this.initX = this.posX = posX;
@@ -23,7 +23,7 @@ var carControl = cc.Sprite.extend({
         if(this.sense == "Normal"){
 			this.posY = this.posY - laneVelocity + this.velocity;
     	} else { // contrário
-    		this.posY = this.posY - laneVelocity + this.velocity;
+    		this.posY = this.posY - laneVelocity - this.velocity;
     		if(laneVelocity == 0) this.posY = this.initY;
     	}
 		this.changePosition();
@@ -35,16 +35,16 @@ var carControl = cc.Sprite.extend({
 	   			this.posY = 670;
 	   		}
     	    if(this.posY > 670)  this.posY = -070;
-	   		if(this.posX < 270)  this.posX = 270;
-	   		if(this.posX > 270 + this.sizeBand)  this.posX = 270 + this.sizeBand;
+	   		if(this.posX < 220)  this.posX = 220;
+	   		if(this.posX > 220 + this.sizeBand)  this.posX = 220 + this.sizeBand;
         } else { // contrário
 	   		if(this.posY < -500) {
 	   			this.posX = this.initX + (this.generateNumber(1, 3) * 15 * this.factor);
 	   			this.posY = 670;
 	   		}
         	if(this.posY > 670)  this.posY = -500;
-	   		if(this.posX < 230)  this.posX = 230;
-	   		if(this.posX > (230 + this.sizeBand))  this.posX = (230 + this.sizeBand);
+	   		if(this.posX < 180)  this.posX = 180;
+	   		if(this.posX > (180 + this.sizeBand))  this.posX = (180 + this.sizeBand);
         }
         this.factor = this.factor * -1;
         this.setPosition(new cc.Point(this.posX, this.posY));

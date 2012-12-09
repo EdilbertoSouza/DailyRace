@@ -9,7 +9,6 @@
         engineDir:'../cocos2d/cocos2d/',
         appFiles:['source/Resource.js',
         'source/Menu.js',
-        'source/Instructions.js',
         'source/GameOver.js',
         'source/MobileGame.js',
         'source/LaneControl.js',

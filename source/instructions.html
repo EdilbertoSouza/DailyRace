@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+   <meta charset="utf-8">
+   <title>
+      Daily Race
+   </title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="Daily Race" content="">
+   <meta name="Edilberto Souza" content="">
+   <!-- Le styles -->
+   <link href="../css/bootstrap.css" rel="stylesheet">
+   <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+   <style type="text/css">
+      body {
+        padding-top: 30px;
+        padding-bottom: 20px;
+      }
+      #gameCanvas {
+        background-color:#000;
+      }
+      .hero-unit{
+        padding: 50px 50px 50px 50px;
+      }
+      #BtNext
+      {
+        margin-left: 150px;
+        width: 120px;
+      }
+      #BtLast
+      {
+        width: 120px;
+      }
+   </style>
+</head>
+
+<body style="padding:0; margin: 0;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </a>
+          <a class="brand" href="#">Estágio I</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>
+          Daily Race
+        </h1>
+        <p>
+          Quanto tempo você consegue dirigir sem bater?
+        </p>
+        <div class="instruction" style="height: 344px; width: 540px;">
+            <hr />
+            Diariamente, temos que correr para cumprir nossos afazeres,
+            incluindo nossos deslocamentos. Necessitamos ir ao trabalho,
+            deixar as crianças no colégio, fazer as compras, ir ao médico,
+            etc. 
+            <br />
+            <br />
+            DailyRace é um jogo que tem como objetivo que você diriga sem 
+            bater. Para isso, você o jogador ou melhor o condutor precisa 
+            tomar uma atitude sensata e racional: 
+            <p> 
+              Ser prudente e paciente no trânsito. 
+            </p>
+            <hr />
+            <p>
+              Controles
+            </p>
+            <img alt="sobre" src="../resource/images/instructions1.png" style="height: 103px; width: 570px" />
+            <br />
+            <button id="BtNext" type="button" autofocus="True" onclick="window.self.location.href = './instructions2.html'">Próxima Página</button>
+            <button id="BtLast" type="button" onclick="history.go(-1)">Página Anterior</button>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>
+          &copy; Company 2012
+        </p>
+      </footer>
+    </div>
+    </body>
+</html>
